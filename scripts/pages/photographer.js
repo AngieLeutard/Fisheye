@@ -68,30 +68,34 @@ function displayHeader(photographer) {
 
 function displayGallery(medias) {
     console.log(medias)
-
     const main = document.querySelector(".photograph_description");
 
     const gallery = document.createElement("div");
     gallery.classList.add('gallery');
 
-    const item = document.createElement("a");
-    item.classList.add('item');
-
-    const item_img = document.createElement("img");
-    item_img.classList.add('item_img');
-
-    const item_title = document.createElement("span");
-    item_title.classList.add('item_title');
-
-    item.appendChild(item_img);
-    item.appendChild(item_title);
-
-    gallery.appendChild(item);
-
-    main.appendChild(gallery);
+    medias.map((media) => {
+        
+        const item = document.createElement("a");
+        item.classList.add('item');
+    
+        const item_img = document.createElement("img");
+        const item_imgSrc = `assets/images/Sample Photos/${media.photographerId}/${media.image}`;
+        item_img.setAttribute("src", item_imgSrc);
+        item_img.classList.add('item_img');
+    
+        const item_title = document.createElement("span");
+        item_title.classList.add('item_title');
+        item_title.textContent = media.title;
+    
+        item.appendChild(item_img);
+        item.appendChild(item_title);
+    
+        gallery.appendChild(item);
+    
+        main.appendChild(gallery);
+    })
 
     return(main);
-
 }
 
 
