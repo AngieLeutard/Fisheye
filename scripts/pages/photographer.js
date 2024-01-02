@@ -1,14 +1,9 @@
-//Mettre le code JavaScript lié à la page photographer.html
-
-// recupérer l'id de l'url
+// Récupération id
 
 const url = new URL(window.location.href);
 const id = url.searchParams.get("id");
 
-// récupérer data (détails + photo + médias) cf kasa find
-
-// pour les medias il faut faire un filter 
-
+// Récupération data
 
 async function getData(id) {
     
@@ -62,8 +57,6 @@ function displayHeader(photographer) {
     informations_wrapper.appendChild(citation);
 
     return(informations);
-
-
 }
 
 function displayGallery(medias) {
@@ -82,12 +75,26 @@ function displayGallery(medias) {
         const item_imgSrc = `assets/images/Sample Photos/${media.photographerId}/${media.image}`;
         item_img.setAttribute("src", item_imgSrc);
         item_img.classList.add('item_img');
+        if(item_imgSrc == `assets/images/Sample Photos/${media.photographerId}/undefined`) {
+            item_img.style.display = "none";
+        }
+
+        const item_video = document.createElement("video");
+        const item_vidSrc = document.createElement("source");
+        const vidSrc = `assets/images/Sample Photos/${media.photographerId}/${media.video}`;
+        item_vidSrc.setAttribute("src", vidSrc);
+        item_video.classList.add('item_img');
+        item_video.appendChild(item_vidSrc);
+        if(vidSrc == `assets/images/Sample Photos/${media.photographerId}/undefined`) {
+            item_video.style.display = "none";
+        }
     
         const item_title = document.createElement("span");
         item_title.classList.add('item_title');
         item_title.textContent = media.title;
     
         item.appendChild(item_img);
+        item.appendChild(item_video);
         item.appendChild(item_title);
     
         gallery.appendChild(item);
