@@ -75,9 +75,6 @@ function displayGallery(medias) {
         const item_imgSrc = `assets/images/Sample Photos/${media.photographerId}/${media.image}`;
         item_img.setAttribute("src", item_imgSrc);
         item_img.classList.add('item_img');
-        if(item_imgSrc == `assets/images/Sample Photos/${media.photographerId}/undefined`) {
-            item_img.style.display = "none";
-        }
 
         const item_video = document.createElement("video");
         const item_vidSrc = document.createElement("source");
@@ -85,16 +82,18 @@ function displayGallery(medias) {
         item_vidSrc.setAttribute("src", vidSrc);
         item_video.classList.add('item_img');
         item_video.appendChild(item_vidSrc);
-        if(vidSrc == `assets/images/Sample Photos/${media.photographerId}/undefined`) {
-            item_video.style.display = "none";
+
+        if(item_imgSrc != `assets/images/Sample Photos/${media.photographerId}/undefined`) {
+            item.appendChild(item_img);
         }
-    
+        if(vidSrc != `assets/images/Sample Photos/${media.photographerId}/undefined`) {
+            item.appendChild(item_video);
+        }
+
         const item_title = document.createElement("span");
         item_title.classList.add('item_title');
         item_title.textContent = media.title;
     
-        item.appendChild(item_img);
-        item.appendChild(item_video);
         item.appendChild(item_title);
     
         gallery.appendChild(item);
