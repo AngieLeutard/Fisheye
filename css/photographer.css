@@ -124,7 +124,40 @@ form input {
     order: 2;
 }
 
-/* Gallery */
+/* PHOTOGRAPH INFOS  */
+
+.photograph_infos {
+    position: fixed;
+    right: 36px;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    width: 376px;
+    height: 68px;
+    border-radius: 5px;
+    background-color: #DB8876;
+    font-family: DM Sans;
+    font-size: 24px;
+    font-weight: 500;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 34px;
+    padding-right: 34px;
+}
+
+.total_likes_wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
+}
+
+.total_likes_icon {
+    color: black;
+    font-size: 20px;
+}
+
+/* GALLERY */
 
 .gallery {
     display: flex;
@@ -175,8 +208,102 @@ form input {
     font-weight: 500;
 }
 
-.fa-heart {
+.like_icon {
     color: #901C1C;
     font-size: 19px;
     cursor: pointer;
+}
+
+/* MODAL */
+
+.modal_background {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background: rgba(196, 196, 196, 0.40);
+}
+
+.modal_wrapper {
+    background-color: #DB8876;
+    border-radius: 5px;
+    width: 669px;
+    padding: 15px 35px 38px 35px;
+}
+
+.modal_body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.modal_top_wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal_close_button {
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.close_button_icon {
+    color: white;
+    font-size: 40px;
+}
+
+.modal_form_title {
+    font-family: DM Sans;
+    font-size: 54px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.form_data_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+}
+
+.label {
+    font-size: 37px;
+    color: #312E2E;
+}
+
+.input {
+    height: 48px;
+    font-family: DM Sans;
+    font-size: 17px;
+    color: #312E2E;
+    padding-left: 5px;
+    margin-bottom: 5px;
+}
+
+.input_message {
+    height: 150px;
+    margin-bottom: 26px;
+}
+
+.submit_button {
+    width: 170px;
+    height: 69px;
+    color: #FFF;
+    font-family: DM Sans;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 5px;
+    background: #901C1C;
 }

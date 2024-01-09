@@ -16,6 +16,45 @@
       <div class="photograph-header">
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
+
+      <div class="modal_background" id="contact_modal">
+        <div class="modal_wrapper">
+          <div class="modal_body">
+            <div class="modal_top_wrapper">
+              <h2 class="modal_form_title">Contactez-moi</h2>
+              <button class="modal_close_button" onclick="closeModal()"><i class="fa-solid fa-x close_button_icon"></i></button>
+            </div>
+            <h3 class="photograph_name"></h3>
+            <form>
+              <div class="form_data_wrapper">
+                <label class="label" for="prénom">Prénom</label>
+                <input class="input" type="text" id="prénom" name="prénom"/>
+              </div>
+              <div class="form_data_wrapper">
+                <label class="label" for="nom">Nom</label>
+                <input class="input" type="text" id="nom" name="nom"/>
+              </div>
+              <div class="form_data_wrapper">
+                <label class="label" for="email">E-mail</label>
+                <input class="input" type="email" id="email" name="email"/>
+              </div>
+              <div class="form_data_wrapper">
+                <label class="label" for="message">Votre message</label>
+                <input class="input input_message" type="message" id="message" name="message"/>
+              </div>
+              <input class="submit_button" type="submit" value="Envoyer"/>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="photograph_infos">
+        <div class="total_likes_wrapper">
+          <span class="photograph_total_likes"></span>
+          <i class="fa-solid fa-heart total_likes_icon"></i>
+        </div>
+        <span class="photograph_price"></span>
+      </div>
     </main>
     <div id="contact_modal">
 			<div class="modal">
