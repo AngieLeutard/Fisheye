@@ -139,7 +139,6 @@ form input {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    cursor: pointer;
 }
 
 .item_img {
@@ -149,8 +148,35 @@ form input {
     object-fit: cover;
 }
 
+.item_description {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .item_title {
     color: #901C1C;
     font-size: 24px;
     font-weight: 400;
+}
+
+.item_likeWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3px;
+}
+
+.item_likeCount {
+    color: #901C1C;
+    font-family: DM Sans;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.fa-heart {
+    color: #901C1C;
+    font-size: 19px;
+    cursor: pointer;
 }

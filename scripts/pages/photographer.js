@@ -22,6 +22,7 @@ getData(id).then(
         console.log(data)
         displayHeader(data.photographer)
         displayGallery(data.medias)
+        generateSlideShow(data.medias)
     }
 )
 
@@ -70,31 +71,53 @@ function displayGallery(medias) {
         
         const item = document.createElement("a");
         item.classList.add('item');
-    
-        const item_img = document.createElement("img");
-        const item_imgSrc = `assets/images/Sample Photos/${media.photographerId}/${media.image}`;
-        item_img.setAttribute("src", item_imgSrc);
-        item_img.classList.add('item_img');
 
-        const item_video = document.createElement("video");
-        const item_vidSrc = document.createElement("source");
-        const vidSrc = `assets/images/Sample Photos/${media.photographerId}/${media.video}`;
-        item_vidSrc.setAttribute("src", vidSrc);
-        item_video.classList.add('item_img');
-        item_video.appendChild(item_vidSrc);
-
-        if(item_imgSrc != `assets/images/Sample Photos/${media.photographerId}/undefined`) {
+        if(media.image) {
+            const item_img = document.createElement("img");
+            const item_imgSrc = `assets/images/Sample Photos/${media.photographerId}/${media.image}`;
+            item_img.setAttribute("src", item_imgSrc);
+            item_img.classList.add('item_img');
             item.appendChild(item_img);
-        }
-        if(vidSrc != `assets/images/Sample Photos/${media.photographerId}/undefined`) {
+        } else if(media.video) {
+            const item_video = document.createElement("video");
+            const item_vidSrc = document.createElement("source");
+            const vidSrc = `assets/images/Sample Photos/${media.photographerId}/${media.video}`;
+            item_vidSrc.setAttribute("src", vidSrc);
+            item_video.classList.add('item_img');
+            item_video.appendChild(item_vidSrc);
             item.appendChild(item_video);
         }
+
+        const item_description = document.createElement("div");
+        item_description.classList.add('item_description');
 
         const item_title = document.createElement("span");
         item_title.classList.add('item_title');
         item_title.textContent = media.title;
-    
-        item.appendChild(item_title);
+
+        const item_like_wrapper = document.createElement("div");
+        item_like_wrapper.classList.add('item_likeWrapper');
+
+        const item_like_count = document.createElement("span");
+        item_like_count.classList.add("item_likeCount");
+        let clicks = 0;
+        item_like_count.innerHTML = clicks;
+
+        function like() {
+            item_like_count.innerHTML = clicks += 1;
+        };
+
+        const item_like_icon = document.createElement("a");
+        item_like_icon.innerHTML = '<i class="fa-solid fa-heart"></i>';
+        item_like_icon.addEventListener("click", like);
+
+        item_like_wrapper.appendChild(item_like_count);
+        item_like_wrapper.appendChild(item_like_icon);
+
+        item_description.appendChild(item_title);
+        item_description.appendChild(item_like_wrapper);
+
+        item.appendChild(item_description);
     
         gallery.appendChild(item);
     
