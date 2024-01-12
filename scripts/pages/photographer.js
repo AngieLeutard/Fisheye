@@ -9,7 +9,6 @@ async function getData(id) {
     
     const response = await fetch("photographers.json")
     let photographers = await response.json()
-    console.log(photographers)
 
     return ({ 
         photographer: photographers.photographers.find(photographer => photographer.id == id),
@@ -20,12 +19,22 @@ async function getData(id) {
 getData(id).then(
     data => {
         console.log(data)
+        formName(data.photographer)
         displayInfos(data.photographer, data.medias)
         displayHeader(data.photographer)
         displayGallery(data.medias)
         generateSlideShow(data.medias)
     }
 )
+
+function formName(photographer) {
+   
+    console.log(photographer.name);
+    const formName = document.querySelector("#formName");
+    formName.classList.add('modal_form_title');
+    formName.textContent = photographer.name;
+
+}
 
 function displayInfos(photographer, medias) {
     const photograph_price = document.querySelector(".photograph_price");
@@ -41,7 +50,6 @@ function getTotalLikes(medias) {
 }
 
 function displayHeader(photographer) {
-    console.log(photographer)
     const informations = document.querySelector(".photograph-header")
 
     const informations_wrapper = document.createElement("div");
@@ -77,7 +85,6 @@ function displayHeader(photographer) {
 }
 
 function displayGallery(medias) {
-    console.log(medias)
     const main = document.querySelector(".photograph_description");
 
     const gallery = document.createElement("div");
