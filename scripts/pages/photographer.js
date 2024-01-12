@@ -20,16 +20,24 @@ async function getData(id) {
 getData(id).then(
     data => {
         console.log(data)
-        displayInfos(data.photographer)
+        displayInfos(data.photographer, data.medias)
         displayHeader(data.photographer)
         displayGallery(data.medias)
         generateSlideShow(data.medias)
     }
 )
 
-function displayInfos(photographer) {
+function displayInfos(photographer, medias) {
     const photograph_price = document.querySelector(".photograph_price");
     photograph_price.textContent = photographer.price + "€ / jour";
+
+    const totalLikes = getTotalLikes(medias)
+    const photograph_total_likes = document.querySelector(".photograph_total_likes");
+    photograph_total_likes.textContent = totalLikes;
+}
+
+function getTotalLikes(medias) {
+    return medias.reduce((result, media) => result + media.likes, 0);
 }
 
 function displayHeader(photographer) {
@@ -114,13 +122,9 @@ function displayGallery(medias) {
         function like() {
             const item_likes = clicks += 1;
             item_like_count.textContent = item_likes;
-            console.log(item_likes)
+            const photograph_total_likes = document.querySelector(".photograph_total_likes");
+            photograph_total_likes.textContent = parseInt(photograph_total_likes.textContent) + 1;
         };
-
-        // const photograph_total_likes = document.querySelector(".photograph_total_likes");
-        // photograph_total_likes.textContent = item_likes;
-
-        console.log(media.likes)
 
         const item_like_icon = document.createElement("a");
         item_like_icon.innerHTML = '<i class="fa-solid fa-heart like_icon"></i>';
