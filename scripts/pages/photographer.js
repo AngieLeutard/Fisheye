@@ -19,6 +19,7 @@ async function getData(id) {
 getData(id).then(
     data => {
         console.log(data)
+        sortGallery(data.medias)
         formName(data.photographer)
         displayInfos(data.photographer, data.medias)
         displayHeader(data.photographer)
@@ -26,6 +27,8 @@ getData(id).then(
         generateSlideShow(data.medias)
     }
 )
+
+// Fonction name dans form
 
 function formName(photographer) {
    
@@ -35,6 +38,8 @@ function formName(photographer) {
     formName.textContent = photographer.name;
 
 }
+
+// Fonction infos encadrées
 
 function displayInfos(photographer, medias) {
     const photograph_price = document.querySelector(".photograph_price");
@@ -48,6 +53,8 @@ function displayInfos(photographer, medias) {
 function getTotalLikes(medias) {
     return medias.reduce((result, media) => result + media.likes, 0);
 }
+
+// Fonction header
 
 function displayHeader(photographer) {
     const informations = document.querySelector(".photograph-header")
@@ -83,6 +90,8 @@ function displayHeader(photographer) {
 
     return(informations, price);
 }
+
+// Fonction Gallery
 
 function displayGallery(medias) {
     const main = document.querySelector(".photograph_description");
@@ -152,3 +161,30 @@ function displayGallery(medias) {
 
     return(main);
 }
+
+// Fonction Sort 
+
+function sortByLikes(medias) {
+    console.log("hello")
+    medias.sort((a, b) => a.likes < b.likes);
+}
+
+function sortByDates(medias) {
+    console.log("hello2")
+}
+
+function sortByTitles(medias) {
+    console.log("hello3")
+}
+
+function sortGallery() {
+    const byLikes = document.querySelector("#sortByLikes");
+    const byDates = document.querySelector("#sortByDates");
+    const byTitles = document.querySelector("#sortByTitles");
+
+    byLikes.addEventListener("click", sortByLikes);
+    byDates.addEventListener("click", sortByDates);
+    byTitles.addEventListener("click", sortByTitles);    
+    console.log("angie")
+}
+
