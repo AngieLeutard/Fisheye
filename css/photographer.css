@@ -1,3 +1,8 @@
+button {
+    border: none;
+    background: none;
+}
+
 #contact_modal {
     display: none;
 }
@@ -30,6 +35,11 @@
     border-radius: 5px;
     cursor: pointer;
     order: 1;
+}
+
+.contact_button:hover {
+    background-color: #DB8876;
+    color: #000;
 }
 
 .modal {
@@ -161,15 +171,16 @@ form input {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 95px;
     justify-content: center;
-    margin-top: 111px;
 }
 
 .item {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding-left: 47px;
+    padding-right: 47px;
+    padding-bottom: 30px;
 }
 
 .item_img {
@@ -177,9 +188,15 @@ form input {
     height: 300px;
     border-radius: 5px;
     object-fit: cover;
+    cursor: pointer;
+}
+
+.item_video {
+    cursor: pointer;
 }
 
 .item_description {
+    max-width: 350px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -322,6 +339,7 @@ form input {
     flex-direction: row;
     margin-top: 20px;
     margin-left: 100px;
+    margin-bottom: 111px;
     gap: 25px;
     width: 270px;
     justify-content: space-between;
@@ -342,12 +360,15 @@ form input {
 
 .link_container {
     border-bottom: solid 1px white;
-    padding-bottom: 14px;
-    padding-top: 14px;
+    padding: 14px 10px 14px 10px;
     color: #FFF;
     font-family: DM Sans;
     font-size: 18px;
     font-weight: 700;
+}
+
+.link_container_title {
+    border-bottom: none;
 }
 
 .textBox_wrapper {
@@ -364,21 +385,24 @@ form input {
     justify-content: space-between;
     position: relative;
     margin: 0;
-    border-radius: 5px 5px 0 0;
+    border-radius: 5px;
     background: #901C1C;
-    font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 24px;
+    padding-left: 20px;
+    padding-bottom: 14px;
+    padding-top: 14px;
+    font-family: DM Sans;
+    font-size: 18px;
+    font-weight: 700;
     color: white;
-    padding-left: 19px;
-    padding-top: 6px;
-    padding-bottom: 6px;
     cursor: pointer;
 }
 
 .textBox_description {
+    position: absolute;
+    bottom: 126px;
+    width: 150px;
     margin: 0;
-    padding: 0 19px 19px 19px;
+    padding: 0 10px 0 10px;
     background-color: #F7F7F7;
     border-radius: 10px;
     font-family: 'Montserrat';
@@ -415,4 +439,68 @@ details[open] .summary-chevron-up {
 
 details[open] .summary-chevron-down {
     display: block;
+}
+
+/* Preview Gallery */
+
+.preview_background {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(196, 196, 196, 0.40);
+}
+
+.preview_body {
+    background-color: white;
+}
+
+.preview_picture_wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 27px;
+    padding: 22px 27px 0 27px;
+}
+
+.preview_close_button {
+    position: absolute;
+    right: 27px;
+    top: 22px;
+}
+
+.preview_close_button_icon {
+    color: #901C1C;
+    font-size: 30px;
+}
+
+.preview_picture {
+    height: 700px;
+}
+
+.chevron {
+    color: #901C1C;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.preview_title_wrapper {
+    width: 450px;
+    padding-left: 85px;
+    padding-top: 12px;
+}
+
+.preview_title {
+    color: #901C1C;
+    font-family: DM Sans;
+    font-size: 24px;
+    font-weight: 400;
 }
