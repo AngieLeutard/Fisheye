@@ -399,6 +399,7 @@ form input {
 
 .textBox_description {
     position: absolute;
+    z-index: 1;
     bottom: 126px;
     width: 150px;
     margin: 0;
@@ -457,39 +458,50 @@ details[open] .summary-chevron-down {
     background-color: rgba(196, 196, 196, 0.40);
 }
 
-.preview_body {
-    background-color: white;
-}
-
 .preview_picture_wrapper {
     position: relative;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 27px;
-    padding: 22px 27px 0 27px;
+    flex-direction: column;
+    padding: 22px 94px 19px 94px;
+    background-color: white;
 }
 
 .preview_close_button {
     position: absolute;
     right: 27px;
-    top: 22px;
+    top: 32px;
+    cursor: pointer;
 }
 
 .preview_close_button_icon {
     color: #901C1C;
-    font-size: 30px;
+    font-size: 45px;
 }
 
 .preview_picture {
-    height: 700px;
+    height: 670px;
+    margin-bottom: 12px;
+}
+
+.chevron_wrapper {
+    padding: 0;
 }
 
 .chevron {
+    position: absolute;
     color: #901C1C;
-    font-size: 30px;
+    font-size: 45px;
     cursor: pointer;
+}
+
+.fa-chevron-left {
+    left: 38px;
+    top: 399px;
+}
+
+.fa-chevron-right {
+    right: 38px;
+    top: 399px;
 }
 
 .preview_title_wrapper {

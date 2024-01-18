@@ -18,7 +18,7 @@ async function getData(id) {
 
 // Fonction name dans form
 
-function formName(photographer) {
+function displayFormName(photographer) {
    
     const formName = document.querySelector("#formName");
     formName.classList.add('modal_form_title');
@@ -78,16 +78,78 @@ function displayHeader(photographer) {
     return(informations, price);
 }
 
-// Aperçu Gallery
+// Fonction Sort
 
-function displayPreview() {
-    const preview = document.getElementById("preview_modal");
-	preview.style.display = "flex";
+function sortByLikes(medias) {
+
+    const gallery = document.querySelector(".gallery");
+    gallery.remove();   
+
+    let sortedMedias = medias.sort((a, b) => (a.likes < b.likes) ? 1 : (a.likes > b.likes) ? -1 : 0);
+  
+    displayGallery(sortedMedias);
+
+    const title = document.querySelector(".sort_title");
+    title.innerHTML = "Popularité";
+
+    const filterBox = document.querySelector(".textBox_wrapper");
+    filterBox.removeAttribute("open");
+
+     // const galleryPicture = document.querySelectorAll('.item_img, .video_src');
+    // console.log(galleryPicture)
+    // console.log(galleryPicture[galleryPicture.length - 1].getAttribute('src'));
 }
 
-function closePreview() {
-    const preview = document.getElementById("preview_modal");
-    preview.style.display = "none";
+function sortByDates(medias) {
+
+    const gallery = document.querySelector(".gallery");
+    gallery.remove();   
+    
+    let sortedDates = medias.sort((a, b) => (a.date > b.date) ? 1 : (a.date < b.date) ? -1 : 0);
+
+    displayGallery(sortedDates);
+
+    const title = document.querySelector(".sort_title");
+    title.innerHTML = "Date";
+
+    const filterBox = document.querySelector(".textBox_wrapper");
+    filterBox.removeAttribute("open");
+
+    // const galleryPicture = document.querySelectorAll('.item_img, .video_src');
+    // console.log(galleryPicture)
+    // console.log(galleryPicture[galleryPicture.length - 1].getAttribute('src'));
+}
+
+function sortByTitles(medias) {
+
+    const gallery = document.querySelector(".gallery");
+    gallery.remove();   
+
+    let sortedTitles = medias.sort((a, b) => (a.title > b.title) ? 1 : (a.title < b.title) ? -1 : 0);
+
+    displayGallery(sortedTitles);
+
+    const title = document.querySelector(".sort_title");
+    title.innerHTML = "Titre";
+
+    const filterBox = document.querySelector(".textBox_wrapper");
+    filterBox.removeAttribute("open");
+
+    // const galleryPicture = document.querySelectorAll('.item_img, .video_src');
+    // console.log(galleryPicture)
+    // console.log(galleryPicture[galleryPicture.length - 1].getAttribute('src'));
+}
+
+function sortGallery(medias) { 
+
+    const byLikes = document.getElementById("sortByLikes");
+    byLikes.addEventListener("click", () => sortByLikes(medias));
+
+    const byDates = document.querySelector("#sortByDates");
+    byDates.addEventListener("click", () => sortByDates(medias));
+
+    const byTitles = document.querySelector("#sortByTitles");
+    byTitles.addEventListener("click", () => sortByTitles(medias));
 }
 
 // Fonction Gallery
@@ -103,6 +165,9 @@ function displayGallery(medias) {
         const item = document.createElement("a");
         item.classList.add('item');
 
+        let srcArray = Array.from(media.image);
+        console.log(srcArray)
+
         if(media.image) {
 
             const item_img = document.createElement("img");
@@ -112,20 +177,47 @@ function displayGallery(medias) {
             item_img.classList.add('item_img');
             item.appendChild(item_img);
 
-            item_img.addEventListener("click", () => displayPreview());
+            // Display Preview
+            item_img.addEventListener("click", () => {
+                const preview = document.getElementById("preview_modal");
+                preview.style.display = "flex";
+
+                let previewPicture = document.getElementById("preview_picture");
+                previewPicture.style.display = "flex";
+                previewPicture.setAttribute("src", item_imgSrc);
+
+                let previewVideo = document.getElementById("preview_video");
+                previewVideo.style.display = "none";
+            });
 
         } else if(media.video) {
 
             const item_video = document.createElement("video");
-            const item_vidSrc = document.createElement("source");
+            item_video.classList.add('item_img');
 
+            const item_vidSrc = document.createElement("source");
             const vidSrc = `assets/images/Sample Photos/${media.photographerId}/${media.video}`;
             item_vidSrc.setAttribute("src", vidSrc);
-            item_video.classList.add('item_img');
+            item_vidSrc.classList.add('video_src');
+
+            
             item_video.appendChild(item_vidSrc);
             item.appendChild(item_video);
 
-            item_video.addEventListener("click", () => displayPreview());
+            // Display Preview
+            item_video.addEventListener("click", () => {
+                const preview = document.getElementById("preview_modal");
+                preview.style.display = "flex";
+
+                let previewVideo = document.getElementById("preview_video");
+                previewVideo.style.display = "flex";
+
+                let previewVideoSrc = document.getElementById("preview_video_src");
+                previewVideoSrc.setAttribute("src", vidSrc);
+
+                let previewPicture = document.getElementById("preview_picture");
+                previewPicture.style.display = "none";               
+            });
 
         }
 
@@ -167,78 +259,44 @@ function displayGallery(medias) {
     
         main.appendChild(gallery);
     })
+
+    // const galleryPicture = document.querySelectorAll('.item_img, .video_src');
+    // console.log(galleryPicture);
+    // console.log(galleryPicture.getAttribute('src'));
 }
 
-// Fonction Sort (faire une variable du resultat ex mediasSorted = medias.sort())
+// Display Preview Gallery
 
-function sortByLikes(medias) {
-
-    const gallery = document.querySelector(".gallery");
-    gallery.remove();   
-
-    let sortedMedias = medias.sort((a, b) => (a.likes < b.likes) ? 1 : (a.likes > b.likes) ? -1 : 0);
-  
-    displayGallery(sortedMedias);
-
-    const title = document.querySelector(".sort_title");
-    title.innerHTML = "Popularité";
-
-    const filterBox = document.querySelector(".textBox_wrapper");
-    filterBox.removeAttribute("open");
-}
-
-function sortByDates(medias) {
-
-    const gallery = document.querySelector(".gallery");
-    gallery.remove();   
+function displayPreview(src) {
     
-    let sortedDates = medias.sort((a, b) => (a.date > b.date) ? 1 : (a.date < b.date) ? -1 : 0);
-
-    displayGallery(sortedDates);
-
-    const title = document.querySelector(".sort_title");
-    title.innerHTML = "Date";
-
-    const filterBox = document.querySelector(".textBox_wrapper");
-    filterBox.removeAttribute("open");
 }
 
-function sortByTitles(medias) {
-
-    const gallery = document.querySelector(".gallery");
-    gallery.remove();   
-
-    let sortedTitles = medias.sort((a, b) => (a.title > b.title) ? 1 : (a.title < b.title) ? -1 : 0);
-
-    displayGallery(sortedTitles);
-
-    const title = document.querySelector(".sort_title");
-    title.innerHTML = "Titre";
-
-    const filterBox = document.querySelector(".textBox_wrapper");
-    filterBox.removeAttribute("open");
+function closePreview() {
+    const preview = document.getElementById("preview_modal");
+    preview.style.display = "none";
 }
 
-function sortGallery(medias) { 
+// Fonction Preview
 
-    const byLikes = document.getElementById("sortByLikes");
-    byLikes.addEventListener("click", () => sortByLikes(medias));
+function getPreviewPicture() {
+    
+    // const targetPicture_src = document.querySelectorAll('.item_img, .video_src').forEach(e => console.log(e.getAttribute('src')));
 
-    const byDates = document.querySelector("#sortByDates");
-    byDates.addEventListener("click", () => sortByDates(medias));
-
-    const byTitles = document.querySelector("#sortByTitles");
-    byTitles.addEventListener("click", () => sortByTitles(medias));
+    // const galleryPicture = document.querySelectorAll('.item_img, .video_src');
+    // console.log(galleryPicture)
+    // console.log(galleryPicture[galleryPicture.length - 1].getAttribute('src'));
 }
+
 
 
 getData(id).then(
     data => {
-        formName(data.photographer)
-        displayInfos(data.photographer, data.medias)
         displayHeader(data.photographer)
+        displayFormName(data.photographer)
+        displayInfos(data.photographer, data.medias)
         displayGallery(data.medias)
         sortGallery(data.medias)
+        getPreviewPicture()
     }
 )
 

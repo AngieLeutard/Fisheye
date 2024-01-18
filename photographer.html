@@ -8,17 +8,15 @@
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - photographe </title>
   </head>
-
   <body>
     <header class="header_wrapper">
       <img src="assets/images/logo.png" class="header_logo" />
     </header>
     <main id="main" class="photograph_description">
-
       <div class="photograph-header">
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
-
+<!-- Filters -->
       <div class="filter_wrapper">
         <span class="filter_title">Trier par</span>
         <details class='textBox_wrapper'>
@@ -38,13 +36,7 @@
           </ul>
         </details>
       </div>
-
-      <!-- <select name="" id="">
-        <option value="Popularité">Popularité</option>
-        <option value="Date">Date</option>
-        <option value="Titre">Titre</option>
-      </select> -->
-
+<!-- Formulaire contact -->
       <div class="modal_background" id="contact_modal">
         <div class="modal_wrapper">
           <div class="modal_body">
@@ -75,23 +67,26 @@
           </div>
         </div>
       </div>
-
+<!-- Preview Gallery -->
       <div class="preview_background" id="preview_modal">
-        <div class="preview_wrapper">
-          <div class="preview_body">
-            <div class="preview_picture_wrapper">
-              <button class="preview_close_button" onclick="closePreview()"><i class="fa-solid fa-x preview_close_button_icon"></i></button>
-              <button><i class="fa-solid fa-chevron-left chevron"></i></button>
-              <img class="preview_picture" src="./assets/images/Sample Photos/243/Animals_Rainbow.jpg" alt="">
-              <button><i class="fa-solid fa-chevron-right chevron"></i></button>
-            </div>
-            <div class="preview_title_wrapper">
-              <span class="preview_title">Arc-en-ciel</span>
-            </div>
-          </div>
+        <div class="preview_picture_wrapper">
+          <button class="preview_close_button" onclick="closePreview()">
+            <i class="fa-solid fa-x preview_close_button_icon"></i>
+          </button>
+          <button class="chevron_wrapper">
+            <i class="fa-solid fa-chevron-left chevron"></i>
+          </button>
+          <img class="preview_picture" id="preview_picture" src="" alt="">
+          <video class="preview_picture" id="preview_video" src="">
+            <source src="" class="preview_picture" id="preview_video_src">
+          </video>
+          <button class="chevron_wrapper">
+            <i class="fa-solid fa-chevron-right chevron"></i>
+          </button>
+          <span class="preview_title">Arc-en-ciel</span>
         </div>
       </div>
-
+<!-- Photograph Infos -->
       <div class="photograph_infos">
         <div class="total_likes_wrapper">
           <span class="photograph_total_likes"></span>
@@ -99,9 +94,7 @@
         </div>
         <span class="photograph_price"></span>
       </div>
-
     </main>
-
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
