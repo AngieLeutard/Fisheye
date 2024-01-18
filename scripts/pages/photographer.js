@@ -165,9 +165,6 @@ function displayGallery(medias) {
         const item = document.createElement("a");
         item.classList.add('item');
 
-        let srcArray = Array.from(media.image);
-        console.log(srcArray)
-
         if(media.image) {
 
             const item_img = document.createElement("img");
@@ -179,6 +176,8 @@ function displayGallery(medias) {
 
             // Display Preview
             item_img.addEventListener("click", () => {
+                item_img.classList.add("-current");
+
                 const preview = document.getElementById("preview_modal");
                 preview.style.display = "flex";
 
@@ -188,6 +187,37 @@ function displayGallery(medias) {
 
                 let previewVideo = document.getElementById("preview_video");
                 previewVideo.style.display = "none";
+
+                // Change preview src
+                const previewArray = Array.from(medias, (media) => media.image);
+                // console.log(previewArray)
+
+                let arrowLeft = document.querySelector(".arrow_left");
+                let arrowRight = document.querySelector(".arrow_right");
+
+                let clickedPicture = document.querySelector(".-current");
+                // console.log(clickedPicture)
+
+                i = 0;
+                console.log("num i" + i)
+
+                arrowLeft.addEventListener('click', function() { 
+                    i --;
+                    if (i < 0) {
+                        i = previewArray.length - 1;
+                        console.log("inf à 0")
+                    }
+                    previewPicture.setAttribute("src", `assets/images/Sample Photos/${media.photographerId}/${previewArray[i]}`);
+                });
+
+                arrowRight.addEventListener('click', function() { 
+                    i ++;
+                    if (i > previewArray.length - 1) {
+                        i = 0;
+                        console.log("sup à 0")
+                    }
+                    previewPicture.setAttribute("src", `assets/images/Sample Photos/${media.photographerId}/${previewArray[i]}`);
+                });
             });
 
         } else if(media.video) {
@@ -274,6 +304,7 @@ function displayPreview(src) {
 function closePreview() {
     const preview = document.getElementById("preview_modal");
     preview.style.display = "none";
+    i = 0;
 }
 
 // Fonction Preview
