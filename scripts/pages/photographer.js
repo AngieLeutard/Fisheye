@@ -16,130 +16,6 @@ async function getData(id) {
     })
 }
 
-// Fonction name dans form
-
-function displayFormName(photographer) {
-   
-    const formName = document.querySelector("#formName");
-    formName.classList.add('modal_form_title');
-    formName.textContent = photographer.name;
-
-}
-
-// Fonction infos encadrées
-
-function displayInfos(photographer, medias) {
-    const photograph_price = document.querySelector(".photograph_price");
-    photograph_price.textContent = photographer.price + "€ / jour";
-
-    const totalLikes = getTotalLikes(medias)
-    const photograph_total_likes = document.querySelector(".photograph_total_likes");
-    photograph_total_likes.textContent = totalLikes;
-}
-
-function getTotalLikes(medias) {
-    return medias.reduce((result, media) => result + media.likes, 0);
-}
-
-// Fonction header
-
-function displayHeader(photographer) {
-    const informations = document.querySelector(".photograph-header")
-
-    const informations_wrapper = document.createElement("div");
-    informations_wrapper.classList.add('infos_wrapper')
-
-    const title = document.createElement( 'h2' );
-    title.textContent = photographer.name;
-    title.classList.add('title');
-
-    const city = document.createElement( 'span' );
-    city.textContent = photographer.city + ", " + photographer.country;
-    city.classList.add('city');
-
-    const citation = document.createElement( 'span' ); 
-    citation.textContent = photographer.tagline;
-    citation.classList.add('citation');
-
-    const picture = document.createElement( 'img' );
-    const pictureSrc = `assets/photographers/${photographer.portrait}`;
-    picture.setAttribute("src", pictureSrc);
-    picture.classList.add('picture')
-
-    informations.appendChild(informations_wrapper)
-    informations.appendChild(picture);
-
-    informations_wrapper.appendChild(title);
-    informations_wrapper.appendChild(city);
-    informations_wrapper.appendChild(citation);
-
-    const price = photographer.price;
-
-    return(informations, price);
-}
-
-// Fonction Sort
-
-function sortByLikes(medias) {
-
-    const gallery = document.querySelector(".gallery");
-    gallery.remove();   
-
-    let sortedMedias = medias.sort((a, b) => (a.likes < b.likes) ? 1 : (a.likes > b.likes) ? -1 : 0);
-  
-    displayGallery(sortedMedias);
-
-    const title = document.querySelector(".sort_title");
-    title.innerHTML = "Popularité";
-
-    const filterBox = document.querySelector(".textBox_wrapper");
-    filterBox.removeAttribute("open");
-}
-
-function sortByDates(medias) {
-
-    const gallery = document.querySelector(".gallery");
-    gallery.remove();   
-    
-    let sortedDates = medias.sort((a, b) => (a.date > b.date) ? 1 : (a.date < b.date) ? -1 : 0);
-
-    displayGallery(sortedDates);
-
-    const title = document.querySelector(".sort_title");
-    title.innerHTML = "Date";
-
-    const filterBox = document.querySelector(".textBox_wrapper");
-    filterBox.removeAttribute("open");
-}
-
-function sortByTitles(medias) {
-
-    const gallery = document.querySelector(".gallery");
-    gallery.remove();   
-
-    let sortedTitles = medias.sort((a, b) => (a.title > b.title) ? 1 : (a.title < b.title) ? -1 : 0);
-
-    displayGallery(sortedTitles);
-
-    const title = document.querySelector(".sort_title");
-    title.innerHTML = "Titre";
-
-    const filterBox = document.querySelector(".textBox_wrapper");
-    filterBox.removeAttribute("open");
-}
-
-function sortGallery(medias) { 
-
-    const byLikes = document.getElementById("sortByLikes");
-    byLikes.addEventListener("click", () => sortByLikes(medias));
-
-    const byDates = document.querySelector("#sortByDates");
-    byDates.addEventListener("click", () => sortByDates(medias));
-
-    const byTitles = document.querySelector("#sortByTitles");
-    byTitles.addEventListener("click", () => sortByTitles(medias));
-}
-
 // Fonction Gallery
 
 function displayGallery(medias) {
@@ -171,46 +47,64 @@ function displayGallery(medias) {
                 previewPicture.style.display = "flex";
                 previewPicture.setAttribute("src", item_imgSrc);
 
+                const previewTitle = document.querySelector(".preview_title");
+                previewTitle.innerHTML = media.title;
+
                 let previewVideo = document.getElementById("preview_video");
                 previewVideo.style.display = "none";
 
                 // Find Key value
 
-                const previewArray = Array.from(medias, (media) => media.image);
-                let currentPicturePlace = media.image;
+                const previewPictureArray = Array.from(medias, (media) => media.image);
+                const previewTitleArray = Array.from(medias, (media) => media.title);
+
+                let currentPictureKey = media.image;
+                let currentTitleKey = media.title;
+
+                console.log(previewTitleArray)
 
                 function getKeyByValue(object, value) {
                     return Object.keys(object).find(key =>
                         object[key] === value);
                 }
                  
-                key = getKeyByValue(previewArray, currentPicturePlace);
+                pictureKey = getKeyByValue(previewPictureArray, currentPictureKey);
+                titleKey = getKeyByValue(previewTitleArray, currentTitleKey);
 
                 // Change preview src
 
                 let arrowLeft = document.querySelector(".arrow_left");
                 let arrowRight = document.querySelector(".arrow_right");
 
-                i = key;
-
-                console.log(i);
+                i = pictureKey;
+                y = titleKey;
                 
                 arrowLeft.addEventListener('click', function() { 
                     i --;
-                    if (i < 0) {
-                        i = previewArray.length - 1;
+                    y --;
+
+                    if (i < 0, y < 0) {
+                        i = previewPictureArray.length - 1;
+                        y = previewTitleArray.length - 1;
                     }
-                    console.log(i)
-                    previewPicture.setAttribute("src", `assets/images/Sample Photos/${media.photographerId}/${previewArray[i]}`);
+
+                    previewPicture.setAttribute("src", `assets/images/Sample Photos/${media.photographerId}/${previewPictureArray[i]}`);
+
+                    previewTitle.innerHTML = `${previewTitleArray[y]}`;
                 });
 
                 arrowRight.addEventListener('click', function() { 
                     i ++;
-                    if (i > previewArray.length - 1) {
+                    y ++;
+
+                    if (i > previewPictureArray.length - 1, y > previewTitleArray.length - 1) {
                         i = 0;
+                        y = 0
                     }
-                    console.log(i)
-                    previewPicture.setAttribute("src", `assets/images/Sample Photos/${media.photographerId}/${previewArray[i]}`);
+
+                    previewPicture.setAttribute("src", `assets/images/Sample Photos/${media.photographerId}/${previewPictureArray[i]}`);
+
+                    previewTitle.innerHTML = `${previewTitleArray[y]}`;
                 });
             });
 
@@ -287,7 +181,6 @@ function displayGallery(medias) {
 
 // Display Preview Gallery
 
-
 function closePreview() {
     const preview = document.getElementById("preview_modal");
     preview.style.display = "none";
@@ -295,11 +188,7 @@ function closePreview() {
 
 getData(id).then(
     data => {
-        displayHeader(data.photographer)
-        displayFormName(data.photographer)
-        displayInfos(data.photographer, data.medias)
         displayGallery(data.medias)
-        sortGallery(data.medias)
     }
 )
 

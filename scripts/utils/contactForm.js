@@ -31,3 +31,19 @@ inputMessage.addEventListener("change", (e) => {
     let inputMessageValue = e.target.value;
     console.log(inputMessageValue)
   });
+
+  // Fonction name dans form
+
+function displayFormName(photographer) {
+   
+  const formName = document.querySelector("#formName");
+  formName.classList.add('modal_form_title');
+  formName.textContent = photographer.name;
+
+}
+
+getData(id).then(
+  data => {
+      displayFormName(data.photographer)
+  }
+)
