@@ -94,10 +94,6 @@ function sortByLikes(medias) {
 
     const filterBox = document.querySelector(".textBox_wrapper");
     filterBox.removeAttribute("open");
-
-     // const galleryPicture = document.querySelectorAll('.item_img, .video_src');
-    // console.log(galleryPicture)
-    // console.log(galleryPicture[galleryPicture.length - 1].getAttribute('src'));
 }
 
 function sortByDates(medias) {
@@ -114,10 +110,6 @@ function sortByDates(medias) {
 
     const filterBox = document.querySelector(".textBox_wrapper");
     filterBox.removeAttribute("open");
-
-    // const galleryPicture = document.querySelectorAll('.item_img, .video_src');
-    // console.log(galleryPicture)
-    // console.log(galleryPicture[galleryPicture.length - 1].getAttribute('src'));
 }
 
 function sortByTitles(medias) {
@@ -134,10 +126,6 @@ function sortByTitles(medias) {
 
     const filterBox = document.querySelector(".textBox_wrapper");
     filterBox.removeAttribute("open");
-
-    // const galleryPicture = document.querySelectorAll('.item_img, .video_src');
-    // console.log(galleryPicture)
-    // console.log(galleryPicture[galleryPicture.length - 1].getAttribute('src'));
 }
 
 function sortGallery(medias) { 
@@ -166,7 +154,6 @@ function displayGallery(medias) {
         item.classList.add('item');
 
         if(media.image) {
-
             const item_img = document.createElement("img");
             const item_imgSrc = `assets/images/Sample Photos/${media.photographerId}/${media.image}`;
 
@@ -176,7 +163,6 @@ function displayGallery(medias) {
 
             // Display Preview
             item_img.addEventListener("click", () => {
-                item_img.classList.add("-current");
 
                 const preview = document.getElementById("preview_modal");
                 preview.style.display = "flex";
@@ -188,25 +174,33 @@ function displayGallery(medias) {
                 let previewVideo = document.getElementById("preview_video");
                 previewVideo.style.display = "none";
 
-                // Change preview src
+                // Find Key value
+
                 const previewArray = Array.from(medias, (media) => media.image);
-                // console.log(previewArray)
+                let currentPicturePlace = media.image;
+
+                function getKeyByValue(object, value) {
+                    return Object.keys(object).find(key =>
+                        object[key] === value);
+                }
+                 
+                key = getKeyByValue(previewArray, currentPicturePlace);
+
+                // Change preview src
 
                 let arrowLeft = document.querySelector(".arrow_left");
                 let arrowRight = document.querySelector(".arrow_right");
 
-                let clickedPicture = document.querySelector(".-current");
-                // console.log(clickedPicture)
+                i = key;
 
-                i = 0;
-                console.log("num i" + i)
-
+                console.log(i);
+                
                 arrowLeft.addEventListener('click', function() { 
                     i --;
                     if (i < 0) {
                         i = previewArray.length - 1;
-                        console.log("inf à 0")
                     }
+                    console.log(i)
                     previewPicture.setAttribute("src", `assets/images/Sample Photos/${media.photographerId}/${previewArray[i]}`);
                 });
 
@@ -214,8 +208,8 @@ function displayGallery(medias) {
                     i ++;
                     if (i > previewArray.length - 1) {
                         i = 0;
-                        console.log("sup à 0")
                     }
+                    console.log(i)
                     previewPicture.setAttribute("src", `assets/images/Sample Photos/${media.photographerId}/${previewArray[i]}`);
                 });
             });
@@ -289,36 +283,15 @@ function displayGallery(medias) {
     
         main.appendChild(gallery);
     })
-
-    // const galleryPicture = document.querySelectorAll('.item_img, .video_src');
-    // console.log(galleryPicture);
-    // console.log(galleryPicture.getAttribute('src'));
 }
 
 // Display Preview Gallery
 
-function displayPreview(src) {
-    
-}
 
 function closePreview() {
     const preview = document.getElementById("preview_modal");
     preview.style.display = "none";
-    i = 0;
 }
-
-// Fonction Preview
-
-function getPreviewPicture() {
-    
-    // const targetPicture_src = document.querySelectorAll('.item_img, .video_src').forEach(e => console.log(e.getAttribute('src')));
-
-    // const galleryPicture = document.querySelectorAll('.item_img, .video_src');
-    // console.log(galleryPicture)
-    // console.log(galleryPicture[galleryPicture.length - 1].getAttribute('src'));
-}
-
-
 
 getData(id).then(
     data => {
@@ -327,7 +300,6 @@ getData(id).then(
         displayInfos(data.photographer, data.medias)
         displayGallery(data.medias)
         sortGallery(data.medias)
-        getPreviewPicture()
     }
 )
 
