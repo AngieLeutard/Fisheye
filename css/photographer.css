@@ -483,6 +483,11 @@ details[open] .summary-chevron-down {
     margin-bottom: 12px;
 }
 
+.preview_video {
+    height: 600px;
+    margin-bottom: 12px;
+}
+
 .chevron_wrapper {
     padding: 0;
 }

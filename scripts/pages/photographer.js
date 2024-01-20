@@ -10,10 +10,10 @@ async function getData(id) {
     const response = await fetch("photographers.json")
     let photographers = await response.json()
 
-    return ({ 
+    return { 
         photographer: photographers.photographers.find(photographer => photographer.id == id),
         medias: photographers.media.filter(media => media.photographerId == id) 
-    })
+    }
 }
 
 // Fonction Gallery
@@ -39,74 +39,8 @@ function displayGallery(medias) {
 
             // Display Preview
             item_img.addEventListener("click", () => {
-
-                const preview = document.getElementById("preview_modal");
-                preview.style.display = "flex";
-
-                let previewPicture = document.getElementById("preview_picture");
-                previewPicture.style.display = "flex";
-                previewPicture.setAttribute("src", item_imgSrc);
-
-                const previewTitle = document.querySelector(".preview_title");
-                previewTitle.innerHTML = media.title;
-
-                let previewVideo = document.getElementById("preview_video");
-                previewVideo.style.display = "none";
-
-                // Find Key value
-
-                const previewPictureArray = Array.from(medias, (media) => media.image);
-                const previewTitleArray = Array.from(medias, (media) => media.title);
-
-                let currentPictureKey = media.image;
-                let currentTitleKey = media.title;
-
-                console.log(previewTitleArray)
-
-                function getKeyByValue(object, value) {
-                    return Object.keys(object).find(key =>
-                        object[key] === value);
-                }
-                 
-                pictureKey = getKeyByValue(previewPictureArray, currentPictureKey);
-                titleKey = getKeyByValue(previewTitleArray, currentTitleKey);
-
-                // Change preview src
-
-                let arrowLeft = document.querySelector(".arrow_left");
-                let arrowRight = document.querySelector(".arrow_right");
-
-                i = pictureKey;
-                y = titleKey;
-                
-                arrowLeft.addEventListener('click', function() { 
-                    i --;
-                    y --;
-
-                    if (i < 0, y < 0) {
-                        i = previewPictureArray.length - 1;
-                        y = previewTitleArray.length - 1;
-                    }
-
-                    previewPicture.setAttribute("src", `assets/images/Sample Photos/${media.photographerId}/${previewPictureArray[i]}`);
-
-                    previewTitle.innerHTML = `${previewTitleArray[y]}`;
-                });
-
-                arrowRight.addEventListener('click', function() { 
-                    i ++;
-                    y ++;
-
-                    if (i > previewPictureArray.length - 1, y > previewTitleArray.length - 1) {
-                        i = 0;
-                        y = 0
-                    }
-
-                    previewPicture.setAttribute("src", `assets/images/Sample Photos/${media.photographerId}/${previewPictureArray[i]}`);
-
-                    previewTitle.innerHTML = `${previewTitleArray[y]}`;
-                });
-            });
+                openPreview(media, medias);
+            })
 
         } else if(media.video) {
 
@@ -124,17 +58,7 @@ function displayGallery(medias) {
 
             // Display Preview
             item_video.addEventListener("click", () => {
-                const preview = document.getElementById("preview_modal");
-                preview.style.display = "flex";
-
-                let previewVideo = document.getElementById("preview_video");
-                previewVideo.style.display = "flex";
-
-                let previewVideoSrc = document.getElementById("preview_video_src");
-                previewVideoSrc.setAttribute("src", vidSrc);
-
-                let previewPicture = document.getElementById("preview_picture");
-                previewPicture.style.display = "none";               
+                openPreview(media, medias);
             });
 
         }
@@ -185,6 +109,70 @@ function closePreview() {
     const preview = document.getElementById("preview_modal");
     preview.style.display = "none";
 }
+
+function openPreview(media, medias) {
+    const preview = document.getElementById("preview_modal");
+    preview.style.display = "flex";
+    const previewWrapper = document.querySelector(".preview_picture_wrapper");
+
+    // Title
+    const previewTitle = document.querySelector(".preview_title");
+    previewTitle.innerHTML = media.title;
+
+    // Pictures
+    let previewPicture = document.getElementById("preview_picture");
+    const item_imgSrc = `assets/images/Sample Photos/${media.photographerId}/${media.image}`;
+    previewPicture.setAttribute("src", item_imgSrc);
+
+    // Videos
+    let previewVideo = document.getElementById("preview_video");
+    const vidSrc = `assets/images/Sample Photos/${media.photographerId}/${media.video}`;
+    let previewVideoSrc = document.getElementById("preview_video_src");
+    previewVideoSrc.setAttribute("src", vidSrc);
+
+    if(media.image) {
+        previewPicture.style.display = "flex";
+        previewVideo.style.display = "none";
+    } else if(media.video) {
+        previewPicture.style.display = "none";
+        previewVideo.style.display = "flex";
+    }
+
+    // Arrows 
+    const arrowLeft = document.createElement("button");
+    arrowLeft.classList.add("chevron_wrapper", "arrow_left");
+    arrowLeft.innerHTML = `<i class="fa-solid fa-chevron-left chevron"></i>`;
+
+    const arrowRight = document.createElement("button");
+    arrowRight.classList.add("chevron_wrapper", "arrow_right");
+    arrowRight.innerHTML = `<i class="fa-solid fa-chevron-right chevron"></i>`;
+
+    // Add elements
+    previewWrapper.appendChild(arrowLeft);
+    previewWrapper.appendChild(arrowRight);
+
+    // Arrow
+    const index = medias.findIndex((element) => element.id === media.id);
+
+    let previousMedia = medias[index - 1];
+    let nextMedia = medias[index + 1];
+
+    if (index == 0) {
+        previousMedia = medias[medias.length - 1];
+        nextMedia = medias[index + 1];
+    } else if(index == medias.length -1) {
+        nextMedia = medias[0];
+        previousMedia = medias[index - 1];
+    }
+    
+    arrowLeft.addEventListener('click', () => {
+        openPreview(previousMedia, medias)
+    });
+
+    arrowRight.addEventListener('click', function() { 
+        openPreview(nextMedia, medias)
+    });
+};
 
 getData(id).then(
     data => {
