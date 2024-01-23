@@ -13,6 +13,7 @@ function photographerTemplate(data) {
 
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture);
+        img.setAttribute("alt", name);
 
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
@@ -22,15 +23,15 @@ function photographerTemplate(data) {
 
         const cityName = document.createElement( 'span' );
         cityName.textContent = city;
-        cityName.classList.add('city_name')
+        cityName.classList.add('city_name');
 
         const taglineContent = document.createElement( 'span' );
         taglineContent.textContent = tagline;
-        taglineContent.classList.add('tagline_content')
+        taglineContent.classList.add('tagline_content');
 
         const priceValue = document.createElement( 'span' );
         priceValue.textContent = price + "€ / jour";
-        priceValue.classList.add('price_value')
+        priceValue.classList.add('price_value');
 
         description.appendChild(cityName);
         description.appendChild(taglineContent);

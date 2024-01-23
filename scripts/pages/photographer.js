@@ -7,8 +7,8 @@ const id = url.searchParams.get("id");
 
 async function getData(id) {
     
-    const response = await fetch("photographers.json")
-    let photographers = await response.json()
+    const response = await fetch("photographers.json");
+    let photographers = await response.json();
 
     return { 
         photographer: photographers.photographers.find(photographer => photographer.id == id),
@@ -36,6 +36,7 @@ function displayGallery(medias) {
             item_img.setAttribute("src", item_imgSrc);
             item_img.classList.add('item_img');
             item.appendChild(item_img);
+            item_img.setAttribute("alt", media.title);
 
             // Display Preview
             item_img.addEventListener("click", () => {
@@ -52,7 +53,6 @@ function displayGallery(medias) {
             item_vidSrc.setAttribute("src", vidSrc);
             item_vidSrc.classList.add('video_src');
 
-            
             item_video.appendChild(item_vidSrc);
             item.appendChild(item_video);
 
@@ -123,6 +123,7 @@ function openPreview(media, medias) {
     let previewPicture = document.getElementById("preview_picture");
     const item_imgSrc = `assets/images/Sample Photos/${media.photographerId}/${media.image}`;
     previewPicture.setAttribute("src", item_imgSrc);
+    previewPicture.setAttribute("alt", media.title);
 
     // Videos
     let previewVideo = document.getElementById("preview_video");
@@ -141,11 +142,13 @@ function openPreview(media, medias) {
     // Arrows 
     const arrowLeft = document.createElement("button");
     arrowLeft.classList.add("chevron_wrapper", "arrow_left");
-    arrowLeft.innerHTML = `<i class="fa-solid fa-chevron-left chevron"></i>`;
+    arrowLeft.innerHTML = `<span class="fa-solid fa-chevron-left chevron"></span>`;
+    arrowLeft.setAttribute('aria-pressed', false);
 
     const arrowRight = document.createElement("button");
     arrowRight.classList.add("chevron_wrapper", "arrow_right");
-    arrowRight.innerHTML = `<i class="fa-solid fa-chevron-right chevron"></i>`;
+    arrowRight.innerHTML = `<span class="fa-solid fa-chevron-right chevron"></span>`;
+    arrowRight.setAttribute('aria-pressed', false)
 
     // Add elements
     previewWrapper.appendChild(arrowLeft);
@@ -166,11 +169,11 @@ function openPreview(media, medias) {
     }
     
     arrowLeft.addEventListener('click', () => {
-        openPreview(previousMedia, medias)
+        openPreview(previousMedia, medias);
     });
 
     arrowRight.addEventListener('click', function() { 
-        openPreview(nextMedia, medias)
+        openPreview(nextMedia, medias);
     });
 };
 

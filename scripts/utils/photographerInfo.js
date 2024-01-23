@@ -1,10 +1,10 @@
 // Fonction header
 
 function displayHeader(photographer) {
-    const informations = document.querySelector(".photograph-header")
+    const informations = document.querySelector(".photograph-header");
 
     const informations_wrapper = document.createElement("div");
-    informations_wrapper.classList.add('infos_wrapper')
+    informations_wrapper.classList.add('infos_wrapper');
 
     const title = document.createElement( 'h2' );
     title.textContent = photographer.name;
@@ -21,9 +21,10 @@ function displayHeader(photographer) {
     const picture = document.createElement( 'img' );
     const pictureSrc = `assets/photographers/${photographer.portrait}`;
     picture.setAttribute("src", pictureSrc);
-    picture.classList.add('picture')
+    picture.classList.add('picture');
+    picture.setAttribute("alt", photographer.name);
 
-    informations.appendChild(informations_wrapper)
+    informations.appendChild(informations_wrapper);
     informations.appendChild(picture);
 
     informations_wrapper.appendChild(title);
@@ -41,7 +42,7 @@ function displayInfos(photographer, medias) {
     const photograph_price = document.querySelector(".photograph_price");
     photograph_price.textContent = photographer.price + "€ / jour";
 
-    const totalLikes = getTotalLikes(medias)
+    const totalLikes = getTotalLikes(medias);
     const photograph_total_likes = document.querySelector(".photograph_total_likes");
     photograph_total_likes.textContent = totalLikes;
 }
@@ -52,7 +53,7 @@ function getTotalLikes(medias) {
 
 getData(id).then(
     data => {
-        displayHeader(data.photographer)
-        displayInfos(data.photographer, data.medias)
+        displayHeader(data.photographer);
+        displayInfos(data.photographer, data.medias);
     }
 )

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <script src="https://kit.fontawesome.com/19e0239bc8.js" crossorigin="anonymous"></script>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -10,11 +10,11 @@
   </head>
   <body>
     <header class="header_wrapper">
-      <img src="assets/images/logo.png" class="header_logo" />
+      <img src="assets/images/logo.png" class="header_logo" alt="logo">
     </header>
     <main id="main" class="photograph_description">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" onclick="displayModal()" aria-pressed="false">Contactez-moi</button>
       </div>
 <!-- Filters -->
       <div class="filter_wrapper">
@@ -22,12 +22,12 @@
         <details class='textBox_wrapper'>
           <summary class='textBox_title'>
             <span class="sort_title">Sélectionner</span>
-            <div class="summary-chevron-up">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </div>
-            <div class="summary-chevron-down">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg>
-            </div>
+            <span class="summary-chevron-up">
+              <i class="fa-solid fa-chevron-down"></i>
+            </span>
+            <span class="summary-chevron-down">
+              <span class="fa-solid fa-chevron-up"></span>
+            </span>
           </summary>
           <ul class='textBox_description'>
             <li class="link_container" id="sortByLikes">Popularité</li>
@@ -38,31 +38,31 @@
       </div>
 <!-- Formulaire contact -->
       <div class="modal_background" id="contact_modal">
-        <div class="modal_wrapper">
+        <div class="modal_wrapper" role="dialog" aria-modal="true">
           <div class="modal_body">
             <div class="modal_top_wrapper">
               <h2 class="modal_form_title">Contactez-moi</h2>
-              <button class="modal_close_button" onclick="closeModal()"><i class="fa-solid fa-x close_button_icon"></i></button>
+              <button class="modal_close_button" onclick="closeModal()" aria-pressed="false"><span class="fa-solid fa-x close_button_icon"></span></button>
             </div>
-            <h3 class="modal_form_title formName" id="formName"></h3>
+            <h3 class="modal_form_title formName" id="formName">Name</h3>
             <form>
               <div class="form_data_wrapper">
                 <label class="label" for="prénom">Prénom</label>
-                <input class="input" type="text" id="prénom" name="prénom"/>
+                <input class="input" type="text" id="prénom" name="prénom">
               </div>
               <div class="form_data_wrapper">
                 <label class="label" for="nom">Nom</label>
-                <input class="input" type="text" id="nom" name="nom"/>
+                <input class="input" type="text" id="nom" name="nom">
               </div>
               <div class="form_data_wrapper">
                 <label class="label" for="email">E-mail</label>
-                <input class="input" type="email" id="email" name="email"/>
+                <input class="input" type="email" id="email" name="email">
               </div>
               <div class="form_data_wrapper">
                 <label class="label" for="message">Votre message</label>
-                <input class="input input_message" type="message" id="message" name="message"/>
+                <input class="input input_message" type="text" id="message" name="message">
               </div>
-              <input class="submit_button" type="submit" value="Envoyer"/>
+              <button class="submit_button" type="submit" aria-pressed="false">Envoyer</button>
             </form>
           </div>
         </div>
@@ -70,12 +70,12 @@
 <!-- Preview Gallery -->
       <div class="preview_background" id="preview_modal">
         <div class="preview_picture_wrapper">
-          <button class="preview_close_button" onclick="closePreview()">
-            <i class="fa-solid fa-x preview_close_button_icon"></i>
+          <button class="preview_close_button" onclick="closePreview()" aria-pressed="false">
+            <span class="fa-solid fa-x preview_close_button_icon"></span>
           </button>
-          <img class="preview_picture" id="preview_picture" src="" alt="">
+          <img class="preview_picture" id="preview_picture" src="#" alt="">
           <video class="preview_video" id="preview_video" controls autoplay>
-            <source src=""  id="preview_video_src" type="video/mp4">
+            <source src="#"  id="preview_video_src" type="video/mp4">
           </video>
           <span class="preview_title"></span>
         </div>
@@ -84,7 +84,7 @@
       <div class="photograph_infos">
         <div class="total_likes_wrapper">
           <span class="photograph_total_likes"></span>
-          <i class="fa-solid fa-heart total_likes_icon"></i>
+          <span class="fa-solid fa-heart total_likes_icon"></span>
         </div>
         <span class="photograph_price"></span>
       </div>
