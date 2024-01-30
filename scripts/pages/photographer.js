@@ -42,7 +42,6 @@ function displayGallery(medias) {
             item_img.addEventListener("click", () => {
                 openPreview(media, medias);
             })
-
         } else if(media.video) {
 
             const item_video = document.createElement("video");
@@ -60,7 +59,6 @@ function displayGallery(medias) {
             item_video.addEventListener("click", () => {
                 openPreview(media, medias);
             });
-
         }
 
         const item_description = document.createElement("div");
@@ -119,24 +117,28 @@ function openPreview(media, medias) {
     const previewTitle = document.querySelector(".preview_title");
     previewTitle.innerHTML = media.title;
 
-    // Pictures
     let previewPicture = document.getElementById("preview_picture");
-    const item_imgSrc = `assets/images/Sample Photos/${media.photographerId}/${media.image}`;
-    previewPicture.setAttribute("src", item_imgSrc);
-    previewPicture.setAttribute("alt", media.title);
-
-    // Videos
     let previewVideo = document.getElementById("preview_video");
-    const vidSrc = `assets/images/Sample Photos/${media.photographerId}/${media.video}`;
-    let previewVideoSrc = document.getElementById("preview_video_src");
-    previewVideoSrc.setAttribute("src", vidSrc);
+
 
     if(media.image) {
+        // Pictures
+        const item_imgSrc = `assets/images/Sample Photos/${media.photographerId}/${media.image}`;
+        previewPicture.setAttribute("src", item_imgSrc);
+        previewPicture.setAttribute("alt", media.title);
         previewPicture.style.display = "flex";
         previewVideo.style.display = "none";
     } else if(media.video) {
-        previewPicture.style.display = "none";
+         // Videos
+        const vidSrc = `./assets/images/Sample%20Photos/${media.photographerId}/${media.video}`;
+        let previewVideoSrc = document.createElement("source");
+        previewVideoSrc.setAttribute("src", vidSrc);
+
+        const vid = document.getElementById("preview_video");
+        vid.appendChild(previewVideoSrc);
+
         previewVideo.style.display = "flex";
+        previewPicture.style.display = "none";
     }
 
     // Arrows 
@@ -175,6 +177,18 @@ function openPreview(media, medias) {
     arrowRight.addEventListener('click', function() { 
         openPreview(nextMedia, medias);
     });
+
+    document.onkeydown = checkKey;
+
+    function checkKey(e) {
+
+        if (e.keyCode == '37') {
+            openPreview(previousMedia, medias);
+        } else if (e.keyCode == '39') {
+            openPreview(nextMedia, medias);
+        }
+        console.log("hello")
+    }
 };
 
 getData(id).then(

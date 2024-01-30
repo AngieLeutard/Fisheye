@@ -14,7 +14,7 @@
     </header>
     <main id="main" class="photograph_description">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()" aria-pressed="false">Contactez-moi</button>
+        <button class="contact_button" onclick="displayModal()" aria-label="Contactez-moi">Contactez-moi</button>
       </div>
 <!-- Filters -->
       <div class="filter_wrapper">
@@ -23,7 +23,7 @@
           <summary class='textBox_title'>
             <span class="sort_title">Sélectionner</span>
             <span class="summary-chevron-up">
-              <i class="fa-solid fa-chevron-down"></i>
+              <span class="fa-solid fa-chevron-down"></span>
             </span>
             <span class="summary-chevron-down">
               <span class="fa-solid fa-chevron-up"></span>
@@ -39,12 +39,12 @@
 <!-- Formulaire contact -->
       <div class="modal_background" id="contact_modal">
         <div class="modal_wrapper" role="dialog" aria-modal="true">
-          <div class="modal_body">
+          <div class="modal_body" aria-label="Formulaire de contact">
             <div class="modal_top_wrapper">
               <h2 class="modal_form_title">Contactez-moi</h2>
-              <button class="modal_close_button" onclick="closeModal()" aria-pressed="false"><span class="fa-solid fa-x close_button_icon"></span></button>
+              <button class="modal_close_button" onclick="closeModal()" aria-label="Fermer le formulaire"><span class="fa-solid fa-x close_button_icon"></span></button>
             </div>
-            <h3 class="modal_form_title formName" id="formName">Name</h3>
+            <h3 class="modal_form_title formName" id="formName" aria-label="Nom photographe">Name</h3>
             <form>
               <div class="form_data_wrapper">
                 <label class="label" for="prénom">Prénom</label>
@@ -62,7 +62,7 @@
                 <label class="label" for="message">Votre message</label>
                 <input class="input input_message" type="text" id="message" name="message">
               </div>
-              <button class="submit_button" type="submit" aria-pressed="false">Envoyer</button>
+              <button class="submit_button" type="submit">Envoyer</button>
             </form>
           </div>
         </div>
@@ -70,23 +70,22 @@
 <!-- Preview Gallery -->
       <div class="preview_background" id="preview_modal">
         <div class="preview_picture_wrapper">
-          <button class="preview_close_button" onclick="closePreview()" aria-pressed="false">
+          <button class="preview_close_button" onclick="closePreview()" aria-label="Fermer l'aperçu">
             <span class="fa-solid fa-x preview_close_button_icon"></span>
           </button>
           <img class="preview_picture" id="preview_picture" src="#" alt="">
-          <video class="preview_video" id="preview_video" controls autoplay>
-            <source src="#"  id="preview_video_src" type="video/mp4">
+          <video class="preview_video" id="preview_video" controls>
           </video>
-          <span class="preview_title"></span>
+          <span class="preview_title" aria-label="Titre du fichier"></span>
         </div>
       </div>
 <!-- Photograph Infos -->
       <div class="photograph_infos">
-        <div class="total_likes_wrapper">
+        <div class="total_likes_wrapper" aria-label="Nombre total de likes">
           <span class="photograph_total_likes"></span>
           <span class="fa-solid fa-heart total_likes_icon"></span>
         </div>
-        <span class="photograph_price"></span>
+        <span class="photograph_price" aria-label="Tarif photographe"></span>
       </div>
     </main>
     <script src="/scripts/pages/photographer.js"></script>
