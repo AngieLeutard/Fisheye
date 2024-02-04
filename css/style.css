@@ -16,7 +16,7 @@ a {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 90px;
+    padding: 40px 100px 40px 100px;
     padding-left: 100px;
     padding-right: 100px;
 }

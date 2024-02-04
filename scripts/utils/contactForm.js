@@ -42,6 +42,14 @@ function displayFormName(photographer) {
 
 }
 
+document.onkeydown = closeForm;
+
+function closeForm(e) {
+    if (e.keyCode == '27') {
+      closeModal();
+    }
+}
+
 getData(id).then(
   data => {
       displayFormName(data.photographer)

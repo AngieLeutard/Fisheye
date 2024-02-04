@@ -10,7 +10,9 @@
   </head>
   <body>
     <header class="header_wrapper">
-      <img src="assets/images/logo.png" class="header_logo" alt="logo">
+      <a href="index.html">
+        <img src="assets/images/logo.png" class="header_logo" alt="logo" tabindex="0">
+      </a>
     </header>
     <main id="main" class="photograph_description">
       <div class="photograph-header">
@@ -30,9 +32,9 @@
             </span>
           </summary>
           <ul class='textBox_description'>
-            <li class="link_container" id="sortByLikes">Popularité</li>
-            <li class="link_container" id="sortByDates">Date</li>
-            <li class="link_container link_container_title " id="sortByTitles">Titre</li>
+            <li class="link_container" id="sortByLikes" tabindex="0" aria-label="trier par popularité">Popularité</li>
+            <li class="link_container" id="sortByDates" tabindex="0" aria-label="trier par date">Date</li>
+            <li class="link_container link_container_title" id="sortByTitles" tabindex="0" aria-label="trier par titre">Titre</li>
           </ul>
         </details>
       </div>
@@ -68,14 +70,13 @@
         </div>
       </div>
 <!-- Preview Gallery -->
-      <div class="preview_background" id="preview_modal">
+      <div class="preview_background" id="preview_modal" tabindex="0">
         <div class="preview_picture_wrapper">
           <button class="preview_close_button" onclick="closePreview()" aria-label="Fermer l'aperçu">
             <span class="fa-solid fa-x preview_close_button_icon"></span>
           </button>
           <img class="preview_picture" id="preview_picture" src="#" alt="">
-          <video class="preview_video" id="preview_video" controls>
-          </video>
+          <video class="preview_video" id="preview_video" tabindex="0" controls></video>
           <span class="preview_title" aria-label="Titre du fichier"></span>
         </div>
       </div>
@@ -92,6 +93,5 @@
     <script src="/scripts/utils/contactForm.js"></script>
     <script src="/scripts/utils/sortingGallery.js"></script>
     <script src="/scripts/utils/photographerInfo.js"></script>
-
   </body>
 </html>

@@ -50,14 +50,35 @@ function sortByTitles(medias) {
 
 function sortGallery(medias) { 
 
+    function keyBoardSBL(e) {
+        if (e.keyCode == '13') {
+            sortByLikes(medias);
+        }
+    }
+    
+    function keyBoardSBD(e) {
+        if (e.keyCode == '13') {
+            sortByDates(medias);
+        }
+    }
+    
+    function keyBoardSBT(e) {
+        if (e.keyCode == '13') {
+            sortByTitles(medias);
+        }
+    }
+
     const byLikes = document.getElementById("sortByLikes");
     byLikes.addEventListener("click", () => sortByLikes(medias));
+    byLikes.onkeydown = keyBoardSBL;
 
     const byDates = document.querySelector("#sortByDates");
     byDates.addEventListener("click", () => sortByDates(medias));
+    byDates.onkeydown = keyBoardSBD;
 
     const byTitles = document.querySelector("#sortByTitles");
     byTitles.addEventListener("click", () => sortByTitles(medias));
+    byTitles.onkeydown = keyBoardSBT;
 }
 
 getData(id).then(
